@@ -1,0 +1,18 @@
+#include <iostream>
+#include <string>
+#include <map>
+
+class DiagnosticTool{
+    public:
+    std::map<std::string,int>system;
+    void RunScane(){
+        for(auto itm: system){
+            std::cout<<itm.first<<" is at "<<itm.second<<std::endl;
+        }
+    }
+};
+int main(){
+    DiagnosticTool test;
+    test.system["Life suport"]=50;
+    test.RunScane();
+}
