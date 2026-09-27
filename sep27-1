@@ -1,0 +1,74 @@
+#include <iostream>
+#include <string>
+
+// 1. THE BRAIN
+enum class AIState {
+    CRUISING,
+    BRAKING,
+    STOPPED
+};
+
+// 2. THE MATH & PHYSICS DATA
+struct Vector3 { float x, y, z; };
+struct AABB { float minZ, maxZ; }; // Simplified collision box for the highway
+
+// 3. THE VEHICLE
+class Truck {
+public:
+    std::string name;
+    Vector3 position;
+    float speed;
+    AIState state;
+
+    // The AI Radar
+    void scanner(float distanceToCarAhead) {
+        if (distanceToCarAhead >= 50.0f) {
+            state = AIState::CRUISING;
+            speed = 65.0f; // Gas pedal down
+            std::cout << "[AI] Highway clear. CRUISING at " << speed << " mph.\n";
+            
+        } else if (distanceToCarAhead > 10.0f && distanceToCarAhead < 50.0f) {
+            state = AIState::BRAKING;
+            speed = 20.0f; // Hit the brakes
+            std::cout << "[AI] Traffic detected! BRAKING to " << speed << " mph.\n";
+            
+        } else {
+            state = AIState::STOPPED;
+            speed = 0.0f; // Dead stop
+            std::cout << "[AI] Collision imminent! STOPPED.\n";
+        }
+    }
+
+    // The Physics Engine
+    void updatePhysics(float dt) {
+        // Move the truck forward based on current speed and Delta Time
+        position.z += speed * dt;
+        std::cout << "-> " << name << " moved to Z-Position: " << position.z << "\n";
+    }
+};
+
+int main() {
+    std::cout << "=== PRISM ENGINE V2.0 ONLINE ===\n\n";
+
+    Truck myTruck;
+    myTruck.name = "Scania R-Series";
+    myTruck.position = {0.0f, 0.0f, 0.0f};
+    myTruck.speed = 0.0f;
+
+    // TEST 1: Open Highway (dt = 1 second)
+    std::cout << "--- TEST 1: 100m Distance ---\n";
+    myTruck.scanner(100.0f);
+    myTruck.updatePhysics(1.0f); 
+
+    // TEST 2: Traffic Jam (dt = 1 second)
+    std::cout << "\n--- TEST 2: 30m Distance ---\n";
+    myTruck.scanner(30.0f);
+    myTruck.updatePhysics(1.0f);
+
+    // TEST 3: Wall Ahead (dt = 1 second)
+    std::cout << "\n--- TEST 3: 5m Distance ---\n";
+    myTruck.scanner(5.0f);
+    myTruck.updatePhysics(1.0f);
+
+    return 0;
+}
