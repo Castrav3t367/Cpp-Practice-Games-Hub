@@ -25,3 +25,34 @@ Pet(std::string t):type(t){}
         shelter.clear();
         
     }
+
+    class Weapon{
+        public:
+        virtual void use(){
+            cout<<"weapon";
+        }
+    };
+    class sword:public Weapon{
+        public:
+        void use() override{
+            cout<<"sword";
+        }
+    };
+    class bow:public Weapon{
+        public:
+        void use() override{
+            cout<<"bow";
+        
+    }
+};
+    
+    int main() {
+    sword s;
+    bow b;
+
+    Weapon* w1 = &s;
+    Weapon* w2 = &b;
+
+    w1->use();
+    w2->use();
+}
