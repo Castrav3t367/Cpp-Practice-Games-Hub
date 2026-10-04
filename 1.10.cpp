@@ -1,3 +1,8 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+
 vector<int> nums = {73, 12, 45, 2, 91, 34, 8};
 
 sort(nums.begin(), nums.end());
@@ -203,3 +208,48 @@ for(auto c:team){
 }
 
 }
+
+
+
+
+class Character{
+private:
+string name;
+int health;
+public:
+Character(string n,int h):name(n),health(h){}
+void getName(){
+    Character.name;
+}
+void getHealth(){
+    Character.health;
+}
+virtual void attack(){
+    cout<<"ATTACK";
+}
+
+~Character(){
+}
+};
+
+class Warrior:public Character{
+public:
+Warrior (string s,int h):Character(s,h){}
+ 
+void attack()override{
+    Warrior.getName();
+}
+
+};
+
+class Mage:public Character{
+public:
+Mage (string s,int h):Character(s,h){}
+ 
+void attack()override{
+    Mage.getName();
+}
+
+};
+
+
