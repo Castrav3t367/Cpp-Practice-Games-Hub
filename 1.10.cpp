@@ -252,4 +252,140 @@ void attack()override{
 
 };
 
+int main (){
 
+vector<Character*> team;
+
+team.push_back(new Warrior("arthur",100));
+team.push_back(new Mage("merlin",80));
+team.push_back(new Warrior("Thor",120));
+
+
+for(const auto& character :auto){
+    character->attack();
+}
+
+for (auto t : team){
+    delete t;
+}
+
+}
+
+
+
+int main() {
+
+    void() {
+        cout << "Hello!";
+    };
+
+}
+
+
+vector<int> nums = {10, 20, 30, 40, 50};
+
+ for_each(nums.begin(),nums.end(),[](int x)){
+    cout<<x;
+ }
+
+
+
+ vector<int> nums = {5, 10, 15, 20};
+
+
+
+ for_each(nums.begin(),nums.end(),[](int& x)){
+    x*=3;
+    cout<<x;
+ }
+
+
+
+
+ vector<int> nums = {2, 4, 6, 8};
+int multiplier = 5;
+
+for_each(nums.begin(),nums.end,[multiplier&](int x)){
+
+    x*= multiplier;
+}
+
+
+unique_ptr<int> ptr1 = make_unique<int>(100);
+
+ptr1 = 500;
+cout<<*ptr1;
+
+
+
+
+
+
+class Character{
+    private:
+    string name;
+    int health;
+    Character(string n,int h):name(n),health(h){}
+    string getName(){
+        return name;
+    }
+    virtual void attack(){
+        cout<<"ATTACK";
+    }
+    virtual ~Character(){
+    }
+
+};
+
+class Warrior:public Character{
+    public:
+    Warrior(string n,int h):Character(n,h){}
+    void attack()override{
+        cout<<"Warrior attacks with sword!";
+    }
+};
+
+ class Mage:public Character{
+    public:
+    Mage(string n,int h):Character(n,h){}
+    void attack()override{
+        cout<<"Mage casts a fireball!";
+    }
+};
+
+
+int main (){
+    vector<unique_ptr<Character>>team;
+    team.push_back(make_unique<Warrior>("Arthur",100));
+    team.push_back(make_unique<Mage>("Merlin",80));
+    team.push_back(make_unique<Warrior>("Thor",120));
+
+    for(const auto& character:team){
+        character->attack();
+    }
+}
+
+
+
+
+class Character{
+    private:
+    string name;
+
+    int health;
+    public:
+    Character(string n,int h):name(n),health(h){}
+    string getName(){
+        return name;
+    }
+    virtual void attack(){
+        cout<<"ATTACK";
+
+    }
+    int getHealth(){
+        return health;
+    }
+    virtual ~Character(){
+    }
+
+};
