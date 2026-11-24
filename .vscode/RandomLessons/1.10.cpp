@@ -389,3 +389,99 @@ class Character{
     }
 
 };
+
+
+
+class Warrior:public Character{
+    public:
+    Warrior(string n,int h):Character(n,h){}
+    void attack()override{
+        cout<<"Warrior attacks with sword!";
+    }
+};
+class Mage:public Character{
+    public:
+    Mage(string n,int h):Character(n,h){}
+    void attack()override{
+        cout<<"Mage casts a fireball!";
+    }
+};
+shared_ptr<Character>arthur = make_shared<Warrior>("Arthur",100);
+
+shared_ptr<Character>ui=arthur;
+shared_ptr<Character>cave=arthur;
+
+shared_ptr<Character>arthur.use_count();
+
+arthur->attack();
+
+
+
+shared_ptr<int> number = make_shared<int>(500);
+
+
+weak_ptr<int> weakNumber = number;
+cout<<number.use_count();
+cout<<number.lock();
+number.reset();
+if(auto temp = weakNumber.lock()){
+    cout<<"Weak pointer is valid";
+} else {    
+    cout<<"Weak pointer is expired";
+}
+
+
+
+class Box {
+private:
+    int* value;
+
+public:
+    Box(int v) {
+        value = new int(v);
+        this->value = other.value;
+        other.value = nullptr;
+    }
+
+    ~Box() {
+        delete value;
+    }
+};
+
+
+
+
+enum class PlayerState {
+    Idle,
+    Running,
+    Attacking,
+    Dead
+};
+
+PlayerState state=PlayerState::Attacking;
+if (state==PlayerState::Attacking){
+    cout<<"Player is attacking";
+}else if(state==PlayerState::Idle){
+    cout<<"Player is idle";
+}else if(state==PlayerState::Running){
+    cout<<"Player is running";
+}else if(state==PlayerState::Dead){
+    cout<<"Player is dead";
+}
+
+
+optional<int> findPotion(bool hasPotion){
+    if(hasPotion){
+        return 50;
+    }
+    return std::nullopt;
+}
+
+int main (){
+    auto potion=findPotion(true);
+    if(potion.has_value()){
+        cout<<"Potion found with value: "<<potion.value();
+    }else{
+        cout<<"No potion found";
+    }
+}
